@@ -6,7 +6,7 @@ const ProductGrid = (props : ProductGridProps) => {
 
 interface ProductGridProps {
     products: Product[];
-    favoritos: Set<string>;
+    favoritos: string[];
     onToggleFav: (id: string) => void;
 }
 
