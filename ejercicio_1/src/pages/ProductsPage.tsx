@@ -7,9 +7,14 @@ const ProductsPage = () => {
         price : 3.5,
         category : "Bebidas"
     }
+
+    const marcarComoFavorito = (id : string) => {
+        console.log(`Se marco como favorito: ${id}`)
+    }
+
     return <ProductCard product={ producto }
-                isFav={ false }
-                onToggle={ () => {} } />
+                isFav={ true }
+                onToggle={ marcarComoFavorito } />
 }
 
 export default ProductsPage

@@ -1,7 +1,19 @@
 const ProductCard = (props : ProductCardProps) => {
+    const heartOnClick = () => {
+        props.onToggle(props.product.id)
+    }
+
     return <div className="card" style={ { width : "18rem" } }>
         <div className="card-body">
-            <h5 className="card-title">{ props.product.name }</h5>
+            <span className="float-end">
+                <i className={ props.isFav ? "bi bi-heart-fill" : "bi bi-heart" }
+                    onClick={ heartOnClick }
+                ></i>
+            </span>
+            
+            <h5 className="card-title">
+                { props.product.name }
+            </h5>
             <p className="card-text">
                 Precio: { props.product.price }
             </p>
@@ -22,7 +34,7 @@ export type Product = {
 interface ProductCardProps {
     product: Product;
     isFav: boolean;
-    onToggle: () => void;
+    onToggle: (id : string) => void;
 }
 
 export default ProductCard
