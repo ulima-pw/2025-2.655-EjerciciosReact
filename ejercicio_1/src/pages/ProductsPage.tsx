@@ -1,7 +1,10 @@
+import { useState } from "react"
 import ProductCard, { type Product } from "../components/ProductCard"
 import ProductGrid from "../components/ProductGrid"
 
 const ProductsPage = () => {
+    const [listaFavoritos, setListaFavoritos] = useState<string[]>([])
+
     const productos : Product[] = [
         {
             id : "1",
@@ -24,10 +27,21 @@ const ProductsPage = () => {
     ] 
 
     const marcarComoFavorito = (id : string) => {
+        if (listaFavoritos.includes(id))
+        {
+            // id ya es favorito
+            setListaFavoritos(
+                [... listaFavoritos.filter( (fav) => { return fav != id } )]
+            )
+        }else {
+            listaFavoritos.push(id)
+            setListaFavoritos([... listaFavoritos])
+        }
+        
         console.log(`Se marco como favorito: ${id}`)
     }
 
-    return <ProductGrid favoritos={[]}
+    return <ProductGrid favoritos={ listaFavoritos }
                 products={ productos }
                 onToggleFav={ marcarComoFavorito } />
 }
