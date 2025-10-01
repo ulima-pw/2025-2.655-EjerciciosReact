@@ -1,4 +1,5 @@
 import ProductCard, { type Product } from "../components/ProductCard"
+import ProductGrid from "../components/ProductGrid"
 
 const ProductsPage = () => {
     const producto : Product = {
@@ -12,9 +13,9 @@ const ProductsPage = () => {
         console.log(`Se marco como favorito: ${id}`)
     }
 
-    return <ProductCard product={ producto }
-                isFav={ true }
-                onToggle={ marcarComoFavorito } />
+    return <ProductGrid favoritos={[]}
+                products={ [] }
+                onToggleFav={ marcarComoFavorito } />
 }
 
 export default ProductsPage

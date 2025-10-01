@@ -3,7 +3,7 @@ const ProductCard = (props : ProductCardProps) => {
         props.onToggle(props.product.id)
     }
 
-    return <div className="card" style={ { width : "18rem" } }>
+    return <div className="card" style={ { width : "100%" } }>
         <div className="card-body">
             <span className="float-end">
                 <i className={ props.isFav ? "bi bi-heart-fill" : "bi bi-heart" }
