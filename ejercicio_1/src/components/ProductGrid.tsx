@@ -11,52 +11,15 @@ const ProductGrid = (props : ProductGridProps) => {
 
     return <div>
         <div className="row">
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <ProductCard product={ producto }
-                    isFav={ false }
-                    onToggle={ props.onToggleFav }/>
-            </div>
-            
+            {
+                props.products.map( (producto : Product) => {
+                    return <div className="col-md-3 mt-2">
+                        <ProductCard product={ producto }
+                            isFav={ false }
+                            onToggle={ props.onToggleFav }/>
+                    </div>
+                } )
+            }
         </div>
     </div>
 }
