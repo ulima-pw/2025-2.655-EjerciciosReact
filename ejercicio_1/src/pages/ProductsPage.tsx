@@ -1,6 +1,8 @@
 import { useState } from "react"
 import ProductCard, { type Product } from "../components/ProductCard"
 import ProductGrid from "../components/ProductGrid"
+import Header from "../components/Header"
+import SearchBar from "../components/SearchBar"
 
 const ProductsPage = () => {
     const [listaFavoritos, setListaFavoritos] = useState<string[]>([])
@@ -41,9 +43,13 @@ const ProductsPage = () => {
         console.log(`Se marco como favorito: ${id}`)
     }
 
-    return <ProductGrid favoritos={ listaFavoritos }
+    return <div className="container">
+        <Header totalFavoritos={ listaFavoritos.length } />
+        
+        <ProductGrid favoritos={ listaFavoritos }
                 products={ productos }
                 onToggleFav={ marcarComoFavorito } />
+    </div>
 }
 
 export default ProductsPage
