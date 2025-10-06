@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar"
 
 const ProductsPage = () => {
     const [listaFavoritos, setListaFavoritos] = useState<string[]>([])
+    const [textoFiltro, setTextoFiltro] = useState<string>("")
 
     const productos : Product[] = [
         {
@@ -45,7 +46,11 @@ const ProductsPage = () => {
 
     return <div className="container">
         <Header totalFavoritos={ listaFavoritos.length } />
-        
+        <SearchBar value={ textoFiltro } 
+            onChange={ (value : string) => {
+                // Filtrar la lista
+                setTextoFiltro(value)
+            } }/>
         <ProductGrid favoritos={ listaFavoritos }
                 products={ productos }
                 onToggleFav={ marcarComoFavorito } />
