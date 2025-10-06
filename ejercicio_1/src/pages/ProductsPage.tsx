@@ -56,8 +56,10 @@ const ProductsPage = () => {
                 }
 
                 // Filtrar la lista
+                const re = new RegExp(`${value}`)
                 const tempLista = productos.filter( (prod : Product) => {
-                    return prod.name == value
+                    return re.test(prod.name)
+                    //return prod.name == value
                 } )
                 setListaProductos(tempLista)
                 setTextoFiltro(value)
