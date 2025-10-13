@@ -1,34 +1,24 @@
-import { useState } from "react"
-import ProductCard, { type Product } from "../components/ProductCard"
+import { useEffect, useState } from "react"
+import { type Product } from "../components/ProductCard"
 import ProductGrid from "../components/ProductGrid"
 import Header from "../components/Header"
 import SearchBar from "../components/SearchBar"
 
-const productos : Product[] = [
-    {
-        id : "1",
-        name : "Gaseosa",
-        price : 3.5,
-        category : "Bebidas"
-    },
-    {
-        id : "2",
-        name : "Cafe",
-        price : 2.5,
-        category : "Bebidas"
-    },
-    {
-        id : "5",
-        name : "Galleta",
-        price : 2.5,
-        category : "Golosinas"
-    }
-] 
 
 const ProductsPage = () => {
     const [listaFavoritos, setListaFavoritos] = useState<string[]>([])
     const [textoFiltro, setTextoFiltro] = useState<string>("")
-    const [listaProductos, setListaProductos] = useState<Product[]>(productos)
+    const [listaProductos, setListaProductos] = useState<Product[]>([])
+
+    const obtenerProductosHTTP = async () => {
+        const resp = await fetch("https://script.google.com/macros/s/AKfycbxuwK4K1JEF-sIUISyVfQboepZNe57jk8tPZgcH3LuCRdjdnYZMjv_uVEXIeYeYdXngyQ/exec?entity=productos")
+        const data = await resp.json()
+        setListaProductos(data)
+    }
+
+    useEffect(() => {
+        obtenerProductosHTTP()
+    }, [])
 
     const marcarComoFavorito = (id : string) => {
         if (listaFavoritos.includes(id))
@@ -48,16 +38,17 @@ const ProductsPage = () => {
     return <div className="container">
         <Header totalFavoritos={ listaFavoritos.length } />
         <SearchBar value={ textoFiltro } 
-            onChange={ (value : string) => {
+            onChange={ async (value : string) => {
                 if (value == "") {
-                    setListaProductos(productos)
+                    await obtenerProductosHTTP()
+                    //setListaProductos(listaProductos)
                     setTextoFiltro(value)
                     return
                 }
 
                 // Filtrar la lista
                 const re = new RegExp(`${value}`)
-                const tempLista = productos.filter( (prod : Product) => {
+                const tempLista = listaProductos.filter( (prod : Product) => {
                     return re.test(prod.name)
                     //return prod.name == value
                 } )
